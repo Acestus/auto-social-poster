@@ -1,0 +1,25 @@
+name: Social Post Workflow
+
+on:
+  create:
+    paths:
+      - posts/**/*.md
+
+jobs:
+  post_to_social_media:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run social media poster
+        run: node src/index.js
